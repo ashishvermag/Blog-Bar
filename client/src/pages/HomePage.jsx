@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -31,30 +32,32 @@ const HomePage = () => {
       </h1>
 
       <div className="space-y-6">
-        {posts.map((post) => (
-          <div 
-            key={post._id} 
-            className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700"
-          >
-            {/* Post Title */}
-            <h2 className="text-2xl font-bold text-blue-400 mb-2">
-              {post.title}
-            </h2>
-
-            {/* Author and Date Info */}
-            <div className="text-sm text-gray-400 mb-4 flex justify-between items-center">
-              <span>By <span className="font-semibold text-gray-200">{post.author?.name || 'Unknown'}</span></span>
-              <span>{new Date(post.createdAt).toLocaleDateString()}</span>
-            </div>
-
-            {/* Post Content (Rich Text) */}
-            {/* We use this special attribute to render the HTML content */}
+        { posts.map((post) => (
+          <Link key={post._id} to={`/posts/${post._id}`} className="block">
             <div 
-              className="text-gray-300 prose prose-invert max-w-none"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-          </div>
-        ))}
+              className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700 hover:border-blue-500 transition duration-200 cursor-pointer"
+            >
+              {/* Post Title */}
+              <h2 className="text-2xl font-bold text-blue-400 mb-2">
+                {post.title}
+              </h2>
+
+              {/* Author and Date Info */}
+              <div className="text-sm text-gray-400 mb-4 flex justify-between items-center">
+                <span>By <span className="font-semibold text-gray-200">{post.author?.name || 'Unknown'}</span></span>
+                <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+              </div>
+
+              {/* Post Snippet (Short form) */}
+              {/* We can limit the content shown on the homepage here */}
+              <div 
+                className="text-gray-300 prose prose-invert max-w-none line-clamp-3" // line-clamp-3 limits to 3 lines
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+            </div>
+          </Link>
+        ))
+        }
 
         {posts.length === 0 && (
           <p className="text-center text-gray-400">
