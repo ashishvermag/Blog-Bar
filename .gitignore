@@ -1,0 +1,17 @@
+# Dependency Directories
+/node_modules
+/client/node_modules
+/server/node_modules
+
+# Configuration & Secrets
+/server/.env
+/client/.env
+.env
+
+# Build Output
+/client/dist
+/build
+
+# Logs and Debug
+npm-debug.log
+.DS_Store
