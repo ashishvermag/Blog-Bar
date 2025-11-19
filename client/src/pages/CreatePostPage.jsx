@@ -103,7 +103,7 @@ const CreatePostPage = () => {
 
 
   return (
-    <div className="max-w-3xl mx-auto mt-10">
+    <div className="max-w-3xl mx-auto mt-20">
       <div className="p-8 bg-gray-800 shadow-md rounded-lg">
         <h1 className="text-3xl font-bold text-center text-white mb-6">
           Create a New Post

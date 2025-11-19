@@ -7,6 +7,7 @@ import Header from './components/Header';
 import CreatePostPage from './pages/CreatePostPage';
 import PostDetailPage from './pages/PostDetailPage';
 import EditPostPage from './pages/EditPostPage';
+import PrivateRoute from './components/PrivateRoute';
 
 
 
@@ -19,9 +20,12 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path='/create-post' element={<CreatePostPage />} />
         <Route path="/posts/:id" element={<PostDetailPage />} />
-       <Route path="/edit-post/:id" element={<EditPostPage />} />
+       {/* Protected Routes (Parent) */}
+          <Route path="" element={<PrivateRoute />}>
+            <Route path="/create-post" element={<CreatePostPage />} /> {/* Protected Child Route */}
+            <Route path="/edit-post/:id" element={<EditPostPage />} /> {/* Protected Child Route */}
+          </Route>
       </Routes>
     </main>
     </div>

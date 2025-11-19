@@ -19,8 +19,8 @@ const Header = () => {
   return (
     <header className="bg-gray-800 text-white p-4 fixed top-0 w-full z-10">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold">
-          BlogBar
+        <Link to="/" className="text-2xl font-bold ml-4">
+          <span className='text-amber-500'>Blog-</span><span className='text-zinc-400'>Bar</span>
         </Link>
 
         {/* 3. Check if userInfo exists */}

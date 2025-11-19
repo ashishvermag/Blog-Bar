@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { setCredentials } from '../store/slices/authSlice';
 
 const LoginPage = () => {
@@ -10,6 +10,12 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // 1. Determine the path to redirect to:
+  //    - If state has a 'from' property, use that (e.g., /posts/123)
+  //    - Otherwise, default to the homepage '/'
+  const from = location.state?.from || '/';
 
   // This will handle the form submission
   const submitHandler = async (e) => {
@@ -24,7 +30,11 @@ const LoginPage = () => {
 
         dispatch(setCredentials(data)); // Update Redux store with user info
 
-        navigate('/'); // Redirect to home page after successful login
+       // **REDIRECT LOGIC**
+      // 2. Navigate the user to the saved path ('from')
+      navigate(from, { replace: true }); 
+      // { replace: true } prevents the user from hitting the 'back' button
+      // and landing back on the login page.
 
 
     } catch (error) {
@@ -33,7 +43,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
+    <div className="max-w-md mx-auto mt-30">
       <div className="p-8 bg-gray-800 shadow-md rounded-lg">
         <h1 className="text-3xl font-bold text-center text-white mb-6">Login</h1>
         <form onSubmit={submitHandler}>

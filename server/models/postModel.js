@@ -16,7 +16,14 @@ const postSchema = new mongoose.Schema(
       type: String, // This will store the rich text (HTML or JSON)
       required: true,
     },
-    // We can add more fields later, like featuredImage, tags, etc.
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+
+    // We can add tags, categories, etc. later if needed
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt

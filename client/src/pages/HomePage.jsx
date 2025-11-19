@@ -26,7 +26,7 @@ const HomePage = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto mt-10">
+    <div className="max-w-4xl mx-auto mt-15">
       <h1 className="text-3xl font-bold text-center text-white mb-8">
         Latest Blog Posts
       </h1>
